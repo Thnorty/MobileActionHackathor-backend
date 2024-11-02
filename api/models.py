@@ -46,8 +46,22 @@ class Senior(models.Model):
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
     medicines = models.ManyToManyField(Medicine, related_name='seniors', blank=True)
     appointments = models.ManyToManyField(Appointment, related_name='seniors', blank=True)
+    location_lat = models.FloatField()
+    location_lon = models.FloatField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.name
+
+
+class FallDetection(models.Model):
+    senior = models.ForeignKey(Senior, on_delete=models.CASCADE)
+    location_lat = models.FloatField()
+    location_lon = models.FloatField()
+    seen = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f'{self.senior.name} - {self.created_at}'
