@@ -21,7 +21,8 @@ class TodayMedicinesApiView(APIView):
                         'description': medicine.description,
                         'when_to_take': medicine.when_to_take.strftime('%H:%M'),
                         'taken': medicine.taken,
-                        'dosage': medicine.dosage
+                        'dosage': medicine.dosage,
+                        'is_empty_stomach': medicine.is_empty_stomach
                     } for medicine in medicines
                 ]
             }
