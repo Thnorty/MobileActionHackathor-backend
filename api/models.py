@@ -2,6 +2,7 @@ import random
 import string
 from django.db import models
 
+from appointments.models import Appointment
 from medicines.models import Medicine
 
 
@@ -44,6 +45,7 @@ class Senior(models.Model):
     address = models.TextField()
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
     medicines = models.ManyToManyField(Medicine, related_name='seniors', blank=True)
+    appointments = models.ManyToManyField(Appointment, related_name='seniors', blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
